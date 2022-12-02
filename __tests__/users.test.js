@@ -27,17 +27,22 @@ describe('user routes', () => {
     });
   });
 
-  // it('POST /api/v1/users/sessions should log in an existing user', async () => {
-  //   // use the User Service to create a new user
-  //   const mockUser = {
-  //     email: 'test@example.com',
-  //     password: '123456',
-  //   };
-  //   await UserService.create(mockUser);
-  //     // log in that user
-  //   const resp = await request(app)
-  //   })
-  //   // confirm a 200
+  it('POST /api/v1/users/sessions should log in an existing user', async () => {
+    // use the User Service to create a new user
+    const mockUser = {
+      email: 'test@example.com',
+      password: '123456',
+    };
+    await UserService.create(mockUser);
+    // log in that user
+    const resp = await request(app)
+      .post('/api/v1/users/sessions')
+      .send(mockUser);
+    // confirm a 200
+    console.log(resp.body);
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual({ message: 'Signed in successfully!' });
+  });
 
   afterAll(() => {
     pool.end();
