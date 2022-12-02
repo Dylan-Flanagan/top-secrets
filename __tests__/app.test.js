@@ -3,28 +3,30 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-const mockUser = {
-  first_name: 'Test',
-  last_name: 'User',
-  email: 'example@test.com',
-  password: 123456,
-};
+// const mockUser = {
+//   first_name: 'Test',
+//   last_name: 'User',
+//   email: 'example@test.com',
+//   password: 123456,
+// };
 
-describe('top-secrets routes', () => {
+describe('user routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
-});
 
-it.skip('create new user', async () => {
-  const res = await (
-    await request(app).post('/api/v1/users')
-  ).setEncoding(mockUser);
-  const { firstName, lastName, email } = mockUser;
-  expect(res.body).toEqual({
-    id: expect.any(String),
-    firstName,
-    lastName,
-    email,
+  it('POST api/v1/users should create new user', async () => {
+    const res = await request(app)
+      .post('/api/v1/users')
+      .send({ email: 'test@example.com', password: '123456' });
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      email: 'test@example.com',
+    });
+  });
+
+  afterAll(() => {
+    pool.end();
   });
 });
