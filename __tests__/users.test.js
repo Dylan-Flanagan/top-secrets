@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const UserService = require('../lib/services/UserService.js');
 
 // const mockUser = {
 //   first_name: 'Test',
@@ -25,6 +26,18 @@ describe('user routes', () => {
       email: 'test@example.com',
     });
   });
+
+  // it('POST /api/v1/users/sessions should log in an existing user', async () => {
+  //   // use the User Service to create a new user
+  //   const mockUser = {
+  //     email: 'test@example.com',
+  //     password: '123456',
+  //   };
+  //   await UserService.create(mockUser);
+  //     // log in that user
+  //   const resp = await request(app)
+  //   })
+  //   // confirm a 200
 
   afterAll(() => {
     pool.end();
