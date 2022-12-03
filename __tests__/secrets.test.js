@@ -8,9 +8,6 @@ describe('user routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
-  afterAll(() => {
-    pool.end();
-  });
 
   it('GET /api/v1/secrets should return a 401 if the user is not logged in', async () => {
     const resp = await request(app).get('/api/v1/secrets');
@@ -44,5 +41,9 @@ describe('user routes', () => {
         created_at: expect.any(String),
       },
     ]);
+  });
+
+  afterAll(() => {
+    pool.end();
   });
 });
