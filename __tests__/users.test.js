@@ -39,7 +39,6 @@ describe('user routes', () => {
       .post('/api/v1/users/sessions')
       .send(mockUser);
     // confirm a 200
-    console.log(resp.body);
     expect(resp.status).toBe(200);
     expect(resp.body).toEqual({ message: 'Signed in successfully!' });
   });
