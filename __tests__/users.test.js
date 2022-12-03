@@ -45,7 +45,7 @@ describe('user routes', () => {
 
   it('/DELETE should return a 401 error when signed out and trying to view /users', async () => {
     const res = await request(app).get('/api/v1/users');
-    console.log(res.body, 'HAHAHA');
+    // console.log(res.body, 'HAHAHA');
     expect(res.body).toEqual({
       message: 'You must be signed in',
       status: 401,
